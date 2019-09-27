@@ -63,8 +63,9 @@ int main(void){
         }
         insert_item(node, item);
         node = node->next;
+        if(inpStr!=nullptr) delete[] inpStr;
     }
-
+    
     while(head!=nullptr)
     {
         if(head->id.substr(0,4) == "2013") {
@@ -78,7 +79,9 @@ int main(void){
             }
             cout << endl;
         }
-        head = head->next;
+        Item* tmp = head->next;
+        if(head!= nullptr) delete head;
+        head = tmp;
     }
     fin.close();
     return 0;
