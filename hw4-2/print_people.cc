@@ -14,12 +14,12 @@ int main()
 
     for(int i=0;i<n;i++)
     {
-        std::cin>>per->name>>per->age;
+        std::cin>>(per+i)->name>>(per+i)->age;
     }
     for(int i=0;i<n;i++)
     {
-        std::cout << "Name:" << per-> name << ", ";
-        std::cout << "Age:" << per->age << std::endl;
+        std::cout << "Name:" << (per+i)-> name << ", ";
+        std::cout << "Age:" << (per+i)->age << std::endl;
     }
     delete[] per;
     return 0;
