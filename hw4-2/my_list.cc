@@ -5,16 +5,45 @@
 #include <string.h> // strtok
 using namespace std;
 
-string* split(const string& str, const string& delim) {
+class StrArray {
+    public:
+        StrArray(std::string *inpPtr, size_t size) : m_ptr(inpPtr), m_size(size) {
+            // Do Nothing
+        }
+
+        ~StrArray() {
+            delete[] m_ptr;
+        }
+
+        std::string& operator[](size_t idx) {
+            return m_ptr[idx];
+        }
+        
+        size_t size() const {
+            return m_size;
+        }
+
+    private:
+        std::string* m_ptr;
+        size_t m_size;
+};
+
+StrArray split(const string& str, const string& delim) {
     string* string_list = new string[10];
-    int idx = 0;
-    char * token = strtok(const_cast<char*>(str.c_str()), delim.c_str());
-    while (token != NULL) {
-        string_list[idx] = token;
-        token = strtok(NULL, delim.c_str());
+    size_t idx = 0;
+    size_t nextStart = 0;
+
+    while (true) {
+        size_t delimPos = str.find(delim, nextStart);
+        if(delimPos == std::string::npos) {
+            string_list[idx] = str.substr(nextStart);
+            break;
+        }
+        string_list[idx] = str.substr(nextStart, delimPos-nextStart);
         ++idx;
+        nextStart = delimPos+1;
     }
-    return string_list;
+    return StrArray(string_list, idx+1);
 }
 
 struct Item {
@@ -52,18 +81,17 @@ int main(void){
             sw=1;
         }
         getline(fin, buffer);
-        string* inpStr = split(buffer,":");
-        item->name = *inpStr;
+        StrArray inpStr = split(buffer,":");
+        item->name = inpStr[0];
         item->age = stoi(inpStr[1]);
         item->id = inpStr[2];
-        string* subjects = split(inpStr[3],",");
-        for(int i=0;!subjects[i].empty();i++)
+        StrArray subjects_ = split(inpStr[3],",");
+        for(int i=0;i<subjects_.size();i++)
         {
-            item->subjects.push_back(subjects[i]);
+            item->subjects.push_back(subjects_[i]);
         }
         insert_item(node, item);
         node = node->next;
-        if(inpStr!=nullptr) delete[] inpStr;
     }
     
     while(head!=nullptr)
