@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <string.h> // strtok
-using namespace std;
 
 class StrArray {
     public:
@@ -28,8 +27,8 @@ class StrArray {
         size_t m_size;
 };
 
-StrArray split(const string& str, const string& delim) {
-    string* string_list = new string[10];
+StrArray split(const std::string& str, const std::string& delim) {
+    std::string* string_list = new std::string[10];
     size_t idx = 0;
     size_t nextStart = 0;
 
@@ -47,10 +46,10 @@ StrArray split(const string& str, const string& delim) {
 }
 
 struct Item {
-    string name;
+    std::string name;
     int age;
-    string id;
-    vector<string> subjects;
+    std::string id;
+    std::vector<std::string> subjects;
     Item* next = nullptr;
 };
 
@@ -65,12 +64,10 @@ void insert_item(struct Item *prev_item, struct Item *item) {
     prev_item->next = item;
 }
 
-int deb;
-
 int main(void){ 
-    ifstream fin;
+    std::ifstream fin;
     fin.open("input.txt");
-    string buffer;
+    std::string buffer;
     Item* head = nullptr;
     Item* node = nullptr;
     int sw=0;
@@ -97,15 +94,15 @@ int main(void){
     while(head!=nullptr)
     {
         if(head->id.substr(0,4) == "2013") {
-            cout<<head->name;
-            cout<<"("<<head->id<<") : ";
+            std::cout<<head->name;
+            std::cout<<"("<<head->id<<") : ";
             for(int i=0;i<head->subjects.size();i++)
             {
-                string subject = head->subjects[i];
-                if(i) cout <<" & ";
-                cout<<subject;
+                std::string subject = head->subjects[i];
+                if(i) std::cout <<" & ";
+                std::cout<<subject;
             }
-            cout << endl;
+            std::cout << std::endl;
         }
         Item* tmp = head->next;
         if(head!= nullptr) delete head;
