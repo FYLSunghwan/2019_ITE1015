@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <string.h> // strtok
 
 class StrArray {
     public:
