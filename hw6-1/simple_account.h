@@ -4,7 +4,7 @@
 class Account
 {
     public:
-        int id, money;
+        int id, money=0;
 };
 
 class AccountManager
