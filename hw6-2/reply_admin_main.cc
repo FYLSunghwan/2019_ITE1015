@@ -14,7 +14,6 @@ int main()
         {
             if(inputs.find("-") != std::string::npos)
             {
-                std::cout << "HI";
                 int idx_st = inputs.find("ve")+ 3;
                 int idx_mid = inputs.find("-");
                 int start = std::stoi(inputs.substr(idx_st, idx_mid - idx_st));
