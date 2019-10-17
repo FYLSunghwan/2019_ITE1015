@@ -31,36 +31,40 @@ int main()
 {
     SortedArray sa;
     std::string inp;
-    std::getline(std::cin, inp);
-    std::vector<std::string> parse;
-    parse = tokenize_getline(inp);
-    for(auto it:parse)
-    {
-        sa.AddNumber(std::stoi(it));
-    }
     while(true)
     {
-        std::cin >> inp;
+        std::getline(std::cin, inp);
         if(inp == "ascend")
         {
             PrintScreen(sa.GetSortedAscending());
         }
-        if(inp == "descend")
+        else if(inp == "descend")
         {
             PrintScreen(sa.GetSortedDescending());
         }
-        if(inp == "max")
+        else if(inp == "max")
         {
             PrintScreen(sa.GetMax());
         }
-        if(inp == "min")
+        else if(inp == "min")
         {
             PrintScreen(sa.GetMin());
         }
-        if(inp=="quit")
+        else if(inp=="quit")
         {
             break;
         }
+        else
+        {
+            std::vector<std::string> parse;
+            parse = tokenize_getline(inp);
+            for(auto it:parse)
+            {
+                sa.AddNumber(std::stoi(it));
+            }
+        }
+        
+
     }
     return 0;
 }
