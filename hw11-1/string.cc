@@ -8,7 +8,7 @@ MyString::MyString() : len_(0), arr_(nullptr)
 MyString::MyString(int len)
 {
     len_ = len;
-    arr_ = new char[len];
+    arr_ = new char[1024];
 }
 
 MyString::MyString(MyString const& vec) : MyString(vec.len_)
@@ -30,7 +30,7 @@ MyString& MyString::operator=(MyString const& vec) {
     }
 
     len_ = vec.len_;
-    arr_= new char[len_];
+    arr_= new char[1024];
 
     for (size_t i = 0; i < len_; ++i) {
         arr_[i] = vec.arr_[i];
@@ -59,7 +59,7 @@ MyString MyString::operator+(const MyString& a) const
     {
         vec.arr_[i] = arr_[i];
     }
-    for(int i=0;i<len_;i++)
+    for(int i=0;i<a.len_;i++)
     {
         vec.arr_[i+len_] = a.arr_[i];
     }
